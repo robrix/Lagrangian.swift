@@ -4,6 +4,8 @@
 struct Subject<T> {
 	var _delayedValue: () -> T
 	
+	var value: T { return _delayedValue() }
+	
 	init(_ value: @auto_closure () -> T) {
 		_delayedValue = value
 	}
