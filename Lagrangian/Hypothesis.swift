@@ -4,7 +4,7 @@
 protocol Hypothesis {
 	typealias SubjectType
 	
-	func test(subject: SubjectType)
+	func test(subject: SubjectType) -> Bool
 }
 
 
@@ -12,8 +12,8 @@ protocol Hypothesis {
 struct Not<T, H : Hypothesis where H.SubjectType == T> : Hypothesis {
 	let hypothesis: H
 	
-	func test(subject: T) {
-		hypothesis.test(subject)
+	func test(subject: T) -> Bool {
+		return hypothesis.test(subject)
 	}
 }
 
@@ -22,7 +22,7 @@ struct Not<T, H : Hypothesis where H.SubjectType == T> : Hypothesis {
 struct Equal<T : Equatable> : Hypothesis {
 	let object: T
 	
-	func test(subject: T) {
-		subject == object
+	func test(subject: T) -> Bool {
+		return subject == object
 	}
 }
