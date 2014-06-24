@@ -12,6 +12,15 @@ struct Subject<T> {
 }
 
 
+/// Printable conformance.
+extension Subject : Printable {
+	var description: String {
+		let mirror = reflect(value)
+		return mirror.summary
+	}
+}
+
+
 operator prefix % {}
 
 /// Make a \c Subject from \c value.
