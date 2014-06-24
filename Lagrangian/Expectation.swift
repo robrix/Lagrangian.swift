@@ -19,6 +19,13 @@ func == <T, H : Hypothesis where H.SubjectType == T> (a: Expectation<T, H>, b: E
 extension Expectation : Equatable {}
 
 
+extension Expectation : Hashable {
+	var hashValue: Int {
+		return description.hashValue
+	}
+}
+
+
 /// Constructs an \c Expectation that a \c Subject will equal some other value.
 func == <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T, Equal<T>> {
 	return Expectation(subject: subject, hypothesis: Equal(object: object))
