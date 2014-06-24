@@ -415,6 +415,7 @@
 				D450AF851958F79000BC5DAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D450AF861958F79000BC5DAA /* Build configuration list for PBXNativeTarget "LagrangianTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +424,7 @@
 				D450AF881958F79000BC5DAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
