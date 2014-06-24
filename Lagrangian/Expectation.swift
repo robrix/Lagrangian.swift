@@ -12,6 +12,13 @@ struct Expectation<T, H : Hypothesis where H.SubjectType == T> {
 }
 
 
+extension Expectation : Printable {
+	var description: String {
+		return "\(_subject) should \(_hypothesis)"
+	}
+}
+
+
 func == <T, H : Hypothesis where H.SubjectType == T> (a: Expectation<T, H>, b: Expectation<T, H>) -> Bool {
 	return a.description == b.description
 }
