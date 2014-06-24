@@ -4,6 +4,7 @@
 protocol Hypothesis {
 	typealias SubjectType
 	
+	/// Test whether the hypothesis is valid for a given subject.
 	func test(subject: SubjectType) -> Bool
 }
 
