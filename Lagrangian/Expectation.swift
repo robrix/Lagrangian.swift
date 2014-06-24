@@ -16,3 +16,9 @@ struct Expectation<T, H : Hypothesis where H.SubjectType == T> {
 func == <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T, Equal<T>> {
 	return Expectation(subject: subject, hypothesis: Equal(object: object))
 }
+
+
+/// Constructs an \c Expectation that a \c Subject will not equal some other value.
+func != <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T, Not<T, Equal<T>>> {
+	return Expectation(subject: subject, hypothesis: Not(hypothesis: Equal(object: object)))
+}
