@@ -10,6 +10,7 @@
 		D450AF731958F79000BC5DAA /* Lagrangian.h in Headers */ = {isa = PBXBuildFile; fileRef = D450AF721958F79000BC5DAA /* Lagrangian.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D450AF791958F79000BC5DAA /* Lagrangian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D450AF6D1958F79000BC5DAA /* Lagrangian.framework */; };
 		D450AF801958F79000BC5DAA /* LagrangianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF7F1958F79000BC5DAA /* LagrangianTests.swift */; };
+		D450AF8A1958F7B700BC5DAA /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF891958F7B700BC5DAA /* Expectation.swift */; };
 		D450AF8C1958F8D800BC5DAA /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF8B1958F8D800BC5DAA /* Subject.swift */; };
 		D450AF8E1958FCE700BC5DAA /* Hypothesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		D450AF781958F79000BC5DAA /* LagrangianTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LagrangianTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D450AF7E1958F79000BC5DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D450AF7F1958F79000BC5DAA /* LagrangianTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LagrangianTests.swift; sourceTree = "<group>"; };
+		D450AF891958F7B700BC5DAA /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		D450AF8B1958F8D800BC5DAA /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hypothesis.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				D450AF721958F79000BC5DAA /* Lagrangian.h */,
+				D450AF891958F7B700BC5DAA /* Expectation.swift */,
 				D450AF8B1958F8D800BC5DAA /* Subject.swift */,
 				D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */,
 				D450AF701958F79000BC5DAA /* Supporting Files */,
@@ -218,6 +221,7 @@
 			files = (
 				D450AF8C1958F8D800BC5DAA /* Subject.swift in Sources */,
 				D450AF8E1958FCE700BC5DAA /* Hypothesis.swift in Sources */,
+				D450AF8A1958F7B700BC5DAA /* Expectation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
