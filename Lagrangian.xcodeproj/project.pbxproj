@@ -13,6 +13,7 @@
 		D450AF8A1958F7B700BC5DAA /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF891958F7B700BC5DAA /* Expectation.swift */; };
 		D450AF8C1958F8D800BC5DAA /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF8B1958F8D800BC5DAA /* Subject.swift */; };
 		D450AF8E1958FCE700BC5DAA /* Hypothesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */; };
+		D450AF9019590C8400BC5DAA /* Suite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF8F19590C8400BC5DAA /* Suite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		D450AF891958F7B700BC5DAA /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		D450AF8B1958F8D800BC5DAA /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hypothesis.swift; sourceTree = "<group>"; };
+		D450AF8F19590C8400BC5DAA /* Suite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				D450AF891958F7B700BC5DAA /* Expectation.swift */,
 				D450AF8B1958F8D800BC5DAA /* Subject.swift */,
 				D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */,
+				D450AF8F19590C8400BC5DAA /* Suite.swift */,
 				D450AF701958F79000BC5DAA /* Supporting Files */,
 			);
 			path = Lagrangian;
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D450AF9019590C8400BC5DAA /* Suite.swift in Sources */,
 				D450AF8C1958F8D800BC5DAA /* Subject.swift in Sources */,
 				D450AF8E1958FCE700BC5DAA /* Hypothesis.swift in Sources */,
 				D450AF8A1958F7B700BC5DAA /* Expectation.swift in Sources */,
