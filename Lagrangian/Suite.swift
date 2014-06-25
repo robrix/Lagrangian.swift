@@ -1,22 +1,26 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-func test(body: () -> ()) -> Test {
+func test(body: () -> ()) -> TestCase {
 	return test(Suite.Registry.defaultSuite, body)
 }
 
-func test(suiteName: String, body: () -> ()) -> Test {
+func test(suiteName: String, body: () -> ()) -> TestCase {
 	var suite = Suite.Registry.get(suiteName)!
 	return test(suite, body)
 }
 
-func test(suite: Suite, body: () -> ()) -> Test {
-	let test = Test(body: body)
+func test(suite: Suite, body: () -> ()) -> TestCase {
+	let test = TestCase(body: body)
 	suite.tests.append(test)
 	return test
 }
 
+protocol Test {
+	func perform()
+}
 
-struct Test {
+
+struct TestCase : Test {
 	let body: () -> ()
 	
 	// fixme: file a radar about the lack of postfix function call syntax overloading
@@ -25,7 +29,7 @@ struct Test {
 	}
 }
 
-class Suite {
+class Suite : Test {
 	struct Registry {
 		// fixme: file a radar about the distinction between static & class for type properties
 		static var defaultSuite = Suite(name: "")
@@ -56,7 +60,7 @@ class Suite {
 }
 
 
-func suite(string: String) -> (Void -> Void) -> Test {
+func suite(string: String) -> (Void -> Void) -> TestCase {
 	let suite = Suite(name: string)
 	Suite.Registry.add(suite)
 	return { body in test(suite, body) }
