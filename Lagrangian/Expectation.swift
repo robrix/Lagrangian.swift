@@ -1,5 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
+let _expectationTest = suite("Expectation")
+
 /// An expectation is the combination of a subject & hypothesis.
 struct Expectation<T, H : Hypothesis where H.SubjectType == T> {
 	var _subject: Subject<T>
@@ -31,6 +33,18 @@ extension Expectation : Hashable {
 		return description.hashValue
 	}
 }
+
+/// fixme: file a radar about gensyms
+/// fixme: file a radar about metaprogramming to define constants
+/// fixme: file a radar about strict globals/constructor funcs
+let _t0 =
+	given([Int]())
+	.when { (var x: [Int]) in x.append(1) ; return x }
+	.expect { (x: Subject<[Int]>) in x.value.count == x.value.count + 1 }
+//	.expect { x, y in x[x.count - 1] == y }
+//	%2 == 23
+//	%"" == ""
+
 
 
 /// Constructs an \c Expectation that a \c Subject will equal some other value.
