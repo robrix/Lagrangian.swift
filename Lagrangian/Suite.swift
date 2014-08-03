@@ -15,6 +15,23 @@ func test(suite: Suite, body: () -> ()) -> TestCase {
 	return test
 }
 
+struct State<T> {
+	let _value: () -> T
+	var value: T { return _value() }
+	
+	init(value: @auto_closure () -> T) {
+		_value = value
+	}
+	
+	func when<U>(body: T -> U) -> State<U> {
+		return State<U>(value: body(value))
+	}
+	
+	func expect<U>(body: Subject<T> -> U) {
+		
+	}
+}
+
 protocol Test {
 	func perform()
 }
