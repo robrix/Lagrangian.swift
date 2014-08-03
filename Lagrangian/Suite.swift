@@ -32,6 +32,11 @@ struct State<T> {
 	}
 }
 
+func given<T>(value: @auto_closure () -> T) -> State<T> {
+	return State(value: value)
+}
+
+
 protocol Test {
 	func perform()
 }
