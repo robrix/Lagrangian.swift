@@ -1,13 +1,13 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 /// The subject of a test.
-struct Subject<T> {
-	var _delayedValue: () -> T
+final class Subject<T> {
+	var _thunk: () -> T
 	
-	var value: T { return _delayedValue() }
+	lazy var value: T = { return self._thunk() }()
 	
 	init(_ value: @auto_closure () -> T) {
-		_delayedValue = value
+		_thunk = value
 	}
 }
 
@@ -15,8 +15,7 @@ struct Subject<T> {
 /// Printable conformance.
 extension Subject : Printable {
 	var description: String {
-		let mirror = reflect(value)
-		return mirror.summary
+		return toString(value)
 	}
 }
 
