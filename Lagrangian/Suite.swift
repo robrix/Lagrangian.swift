@@ -46,7 +46,7 @@ class Suite : Test {
 	}
 	
 	let name: String
-	var tests = Test[]()
+	var tests = [Test]()
 	
 	init(name: String) {
 		self.name = name
