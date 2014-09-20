@@ -4,19 +4,19 @@ let _expectationTest = suite("Expectation")
 
 /// An expectation is the combination of a subject & hypothesis.
 struct Expectation<T, H : Hypothesis where H.SubjectType == T> {
-	var _subject: Subject<T>
-	let _hypothesis: H
-	
+	private var subject: Subject<T>
+	private let hypothesis: H
+
 	init(subject: Subject<T>, hypothesis: H) {
-		_subject = subject
-		_hypothesis = hypothesis
+		self.subject = subject
+		self.hypothesis = hypothesis
 	}
 }
 
 
 extension Expectation : Printable {
 	var description: String {
-		return "\(_subject) should \(_hypothesis)"
+		return "\(subject) should \(hypothesis)"
 	}
 }
 

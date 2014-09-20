@@ -15,16 +15,16 @@ func test(suite: Suite, body: () -> ()) -> TestCase {
 	return test
 }
 
-struct State<T> {
-	let _value: () -> T
-	var value: T { return _value() }
+final class State<T> {
+	private let thunk: () -> T
+	lazy var value: T = { return self.thunk() }()
 	
-	init(value: @autoclosure () -> T) {
-		_value = value
+	init(_ f: @autoclosure () -> T) {
+		thunk = f
 	}
 	
 	func when<U>(body: T -> U) -> State<U> {
-		return State<U>(value: body(value))
+		return State<U>(body(value))
 	}
 	
 	func expect<U>(body: Subject<T> -> U) {
@@ -33,7 +33,7 @@ struct State<T> {
 }
 
 func given<T>(value: @autoclosure () -> T) -> State<T> {
-	return State(value: value)
+	return State(value)
 }
 
 

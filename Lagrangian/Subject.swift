@@ -2,12 +2,16 @@
 
 /// The subject of a test.
 final class Subject<T> {
-	var _thunk: () -> T
+	private var thunk: (() -> T)?
 	
-	lazy var value: T = { return self._thunk() }()
+	lazy var value: T = {
+		let v = self.thunk!()
+		self.thunk = nil
+		return v
+	}()
 	
 	init(_ value: @autoclosure () -> T) {
-		_thunk = value
+		thunk = value
 	}
 }
 
