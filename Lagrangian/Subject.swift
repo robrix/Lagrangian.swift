@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 /// The subject of a test.
-final class Subject<T> {
+public final class Subject<T> {
 	private var thunk: (() -> T)?
 	
 	lazy var value: T = {
@@ -18,7 +18,7 @@ final class Subject<T> {
 
 /// Printable conformance.
 extension Subject : Printable {
-	var description: String {
+	public var description: String {
 		return toString(value)
 	}
 }

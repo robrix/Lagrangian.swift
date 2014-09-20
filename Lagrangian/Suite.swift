@@ -15,24 +15,24 @@ func test(suite: Suite, body: () -> ()) -> TestCase {
 	return test
 }
 
-final class State<T> {
+public final class State<T> {
 	private let thunk: () -> T
-	lazy var value: T = { return self.thunk() }()
+	public lazy var value: T = { return self.thunk() }()
 	
-	init(_ f: @autoclosure () -> T) {
+	public init(_ f: @autoclosure () -> T) {
 		thunk = f
 	}
 	
-	func when<U>(body: T -> U) -> State<U> {
+	public func when<U>(body: T -> U) -> State<U> {
 		return State<U>(body(value))
 	}
 	
-	func expect<U>(body: Subject<T> -> U) {
+	public func expect<U>(body: Subject<T> -> U) {
 		
 	}
 }
 
-func given<T>(value: @autoclosure () -> T) -> State<T> {
+public func given<T>(value: @autoclosure () -> T) -> State<T> {
 	return State(value)
 }
 
