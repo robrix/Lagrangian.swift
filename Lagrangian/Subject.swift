@@ -13,6 +13,10 @@ public final class Subject<T> {
 	init(_ value: @autoclosure () -> T) {
 		thunk = value
 	}
+
+	public func expect<L : BooleanType>(body: Subject<T> -> L) -> Subject<T> {
+		return self
+	}
 }
 
 
