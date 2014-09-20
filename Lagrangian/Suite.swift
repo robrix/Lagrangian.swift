@@ -15,28 +15,6 @@ func test(suite: Suite, body: () -> ()) -> TestCase {
 	return test
 }
 
-public final class State<T> {
-	private let thunk: () -> T
-	public lazy var value: T = { return self.thunk() }()
-	
-	public init(_ f: @autoclosure () -> T) {
-		thunk = f
-	}
-	
-	public func when<U>(body: T -> U) -> State<U> {
-		return State<U>(body(value))
-	}
-	
-	public func expect<U>(body: Subject<T> -> U) {
-		
-	}
-}
-
-public func given<T>(value: @autoclosure () -> T) -> State<T> {
-	return State(value)
-}
-
-
 protocol Test {
 	func perform()
 }
