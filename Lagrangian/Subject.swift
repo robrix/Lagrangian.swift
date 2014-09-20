@@ -14,6 +14,10 @@ public final class Subject<T> {
 		thunk = value
 	}
 
+	public func when<U>(body: T -> U) -> Subject<U> {
+		return Subject<U>(body(value))
+	}
+
 	public func expect<L : BooleanType>(body: Subject<T> -> L) -> Subject<T> {
 		return self
 	}
