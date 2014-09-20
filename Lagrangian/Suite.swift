@@ -19,7 +19,7 @@ struct State<T> {
 	let _value: () -> T
 	var value: T { return _value() }
 	
-	init(value: @auto_closure () -> T) {
+	init(value: @autoclosure () -> T) {
 		_value = value
 	}
 	
@@ -32,7 +32,7 @@ struct State<T> {
 	}
 }
 
-func given<T>(value: @auto_closure () -> T) -> State<T> {
+func given<T>(value: @autoclosure () -> T) -> State<T> {
 	return State(value: value)
 }
 
