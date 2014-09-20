@@ -28,6 +28,10 @@ public func given<T>(value: @autoclosure () -> T) -> State<T> {
 	return State(value)
 }
 
+public func given<T>(value: @autoclosure () -> T) -> Subject<T> {
+	return Subject(value)
+}
+
 public final class State<T> {
 	private let thunk: () -> T
 	public lazy var value: T = { return self.thunk() }()
