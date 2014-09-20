@@ -18,11 +18,3 @@ extension Subject : Printable {
 		return toString(value)
 	}
 }
-
-
-prefix operator % {}
-
-/// Make a \c Subject from \c value.
-prefix func % <T> (value: @autoclosure () -> T) -> Subject<T> {
-	return Subject(value)
-}
