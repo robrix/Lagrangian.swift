@@ -23,7 +23,6 @@ protocol Test {
 struct TestCase : Test {
 	let body: () -> ()
 	
-	// fixme: file a radar about the lack of postfix function call syntax overloading
 	func perform() {
 		body()
 	}
