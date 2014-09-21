@@ -39,7 +39,7 @@ extension Expectation : Hashable {
 /// fixme: file a radar about strict globals/constructor funcs
 let _t0 =
 	given([Int]())
-	.when { (var x) in x.append(1) ; return x }
+	.when { x in x.append(1) ; return x }
 	.expect { (x: Subject<[Int]>) in x.value.count == x.value.count + 1 }
 //	.expect { x, y in x[x.count - 1] == y }
 //	%2 == 23
