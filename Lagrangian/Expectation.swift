@@ -3,7 +3,7 @@
 let _expectationTest = suite("Expectation")
 
 /// An expectation is the combination of a subject & hypothesis.
-public struct Expectation<T, H : Hypothesis where H.SubjectType == T> {
+public struct Expectation<T, H : HypothesisType where H.Subject == T> {
 	private var subject: Subject<T>
 	private let hypothesis: H
 
@@ -21,7 +21,7 @@ extension Expectation : Printable {
 }
 
 
-public func == <T, H : Hypothesis where H.SubjectType == T> (a: Expectation<T, H>, b: Expectation<T, H>) -> Bool {
+public func == <T, H : HypothesisType where H.Subject == T> (a: Expectation<T, H>, b: Expectation<T, H>) -> Bool {
 	return a.description == b.description
 }
 
@@ -54,6 +54,6 @@ public func == <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T
 
 
 /// Constructs an \c Expectation that a \c Subject will not equal some other value.
-public func != <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T, Not<T, Equal<T>>> {
+public func != <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T, Not<Equal<T>>> {
 	return Expectation(subject: subject, hypothesis: Not(hypothesis: Equal(object: object)))
 }
