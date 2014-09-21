@@ -16,7 +16,7 @@ public struct Not<H : HypothesisType> : HypothesisType {
 	public var description: String { return "not \(hypothesis.description)" }
 
 	public func test(subject: H.Subject) -> Bool {
-		return hypothesis.test(subject)
+		return !hypothesis.test(subject)
 	}
 }
 
