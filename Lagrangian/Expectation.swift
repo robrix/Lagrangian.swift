@@ -57,3 +57,9 @@ public func == <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T
 public func != <T : Equatable> (subject: Subject<T>, object: T) -> Expectation<T, Not<Equal<T>>> {
 	return Expectation(subject: subject, hypothesis: Not(hypothesis: Equal(object: object)))
 }
+
+
+/// Negates a hypothesis.
+public prefix func ! <H : HypothesisType> (hypothesis: H) -> Not<H> {
+	return Not(hypothesis: hypothesis)
+}
