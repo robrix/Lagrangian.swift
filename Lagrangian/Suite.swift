@@ -32,15 +32,15 @@ class Suite : Test {
 	struct Registry {
 		// fixme: file a radar about the distinction between static & class for type properties
 		static var defaultSuite = Suite(name: "")
-		static var _suites = [defaultSuite.name: defaultSuite]
+		private static var suites = [defaultSuite.name: defaultSuite]
 
 		// fixme: file a radar about the lack of static subscripts
 		static func add(suite: Suite) {
-			_suites[suite.name] = suite
+			suites[suite.name] = suite
 		}
 
 		static func get(name: String) -> Suite? {
-			return _suites[name]
+			return suites[name]
 		}
 	}
 
