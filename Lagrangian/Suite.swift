@@ -34,24 +34,24 @@ class Suite : Test {
 		// fixme: file a radar about the distinction between static & class for type properties
 		static var defaultSuite = Suite(name: "")
 		static var _suites = [defaultSuite.name: defaultSuite]
-		
+
 		// fixme: file a radar about the lack of static subscripts
 		static func add(suite: Suite) {
 			_suites[suite.name] = suite
 		}
-		
+
 		static func get(name: String) -> Suite? {
 			return _suites[name]
 		}
 	}
-	
+
 	let name: String
 	var tests = [Test]()
-	
+
 	init(name: String) {
 		self.name = name
 	}
-	
+
 	func perform() {
 		for test in tests {
 			test.perform()

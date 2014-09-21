@@ -3,13 +3,13 @@
 /// The subject of a test.
 public final class Subject<T> {
 	private var thunk: (() -> T)?
-	
+
 	lazy var value: T = {
 		let v = self.thunk!()
 		self.thunk = nil
 		return v
 	}()
-	
+
 	init(_ value: @autoclosure () -> T) {
 		thunk = value
 	}
