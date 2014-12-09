@@ -33,6 +33,13 @@ public final class Subject<T> {
 	}
 }
 
+private let _t0 = given([Int]())
+	.when { (inout x: [Int]) -> [Int] in
+		x.append(1)
+		return x
+	}
+
+
 
 /// Printable conformance.
 extension Subject : Printable {
