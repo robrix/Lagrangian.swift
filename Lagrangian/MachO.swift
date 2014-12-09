@@ -98,10 +98,10 @@ public struct Header: DebugPrintable {
 			let strings = UnsafePointer<UnsafePointer<CChar>>(base.advancedBy(fileSlide))
 			var sym = UnsafePointer<nlist_64>(base.advancedBy(Int(symtab.memory.symoff) + fileSlide))
 
-			let stringify: UnsafePointer<nlist_64> -> String? = {
-				(Int32(sym.memory.n_type) & N_EXT != N_EXT) ?
-					String.fromCString(strings.advancedBy(Int(L3StringIndexOfSymbolTableEntry($0))).memory)
-				:	nil
+			let stringify: UnsafePointer<nlist_64> -> String? = { s in
+				((Int32(s.memory.n_type) & N_EXT) != N_EXT) ?
+					nil
+				:	String.fromCString(strings.advancedBy(Int(L3StringIndexOfSymbolTableEntry(s))).memory)
 			}
 
 			return reduce(0..<Int(symtab.memory.nsyms), (sym, [])) { (into: (UnsafePointer<nlist_64>, [String]), _) in
