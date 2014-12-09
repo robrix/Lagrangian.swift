@@ -24,7 +24,11 @@ public final class Subject<T> {
 		return Subject<U>(body(&value))
 	}
 
-	public func expect<L : BooleanType>(body: Subject<T> -> L) -> Subject<T> {
+	public func expect<H : HypothesisType>(body: Subject<T> -> Expectation<H>) -> Expectation<H> {
+		return body(self)
+	}
+
+	public func expect<H : HypothesisType>(body: (Subject<T>, Subject<T>) -> H) -> Subject<T> {
 		return self
 	}
 }
