@@ -10,7 +10,7 @@ public struct Image {
 	}
 
 
-	public subscript (name: String) -> Symbol {
+	public subscript (name: String) -> Symbol? {
 		return Symbol(name: name, handle: dlsym(handle, name))
 	}
 
@@ -116,13 +116,21 @@ public struct Header: DebugPrintable {
 }
 
 
-public struct Symbol {
-	public init(name: String, handle: UnsafeMutablePointer<Void>) {
+public struct Symbol: DebugPrintable {
+	public init?(name: String, handle: UnsafeMutablePointer<Void>) {
 		self.name = name
 		self.handle = handle
+		if handle == nil { return nil }
 	}
 
 	public let name: String
+
+
+	// MARK: DebugPrintable
+
+	public var debugDescription: String {
+		return "\(name) @ \(handle)"
+	}
 
 
 	// MARK: Private

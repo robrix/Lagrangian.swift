@@ -18,6 +18,8 @@ final class LagrangianTests: XCTestCase {
 	func testVisibilityOfSymbolsToTheDynamicLoader() {
 		let image = Image()
 
+		println(image["L3StringIndexOfSymbolTableEntry"])
+
 		let Lagrangian = find(Header.loadedHeaders) {
 			($0.path as NSString).lastPathComponent == "Lagrangian"
 		}
