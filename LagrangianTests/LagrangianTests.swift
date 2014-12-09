@@ -17,9 +17,19 @@ final class LagrangianTests: XCTestCase {
 
 	func testVisibilityOfSymbolsToTheDynamicLoader() {
 		let image = Image()
-		Header.loadedHeaders.map {
-			$0.symbols
+
+		let Lagrangian = find(Header.loadedHeaders) {
+			($0.path as NSString).lastPathComponent == "Lagrangian"
 		}
-		println()
+		XCTAssertTrue(Lagrangian != nil)
+		XCTAssertTrue((Lagrangian?.symbols.count ?? -1) > 0)
 	}
+}
+
+
+private func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
+	for each in domain {
+		if predicate(each) { return each }
+	}
+	return nil
 }
