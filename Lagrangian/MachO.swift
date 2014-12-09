@@ -85,7 +85,7 @@ public struct Header: DebugPrintable {
 				}
 
 			case UInt32(LC_SYMTAB):
-				let symtab = UnsafePointer<symtab_command>(each)
+				symtab = UnsafePointer<symtab_command>(each)
 
 			default:
 				if text != nil && linkedit != nil && symtab != nil { break iterate }
