@@ -57,9 +57,13 @@ public struct Header: DebugPrintable {
 	}
 
 	private var commands: [UnsafePointer<load_command>] {
-		return reduce(1..<Int(self.handle.memory.ncmds), [UnsafePointer<load_command>(self.handle.successor())]) { into, _ in
-			return into + [UnsafePointer<load_command>(UnsafePointer<Int8>(into.last!).advancedBy(Int(into.last!.memory.cmdsize)))]
+		let next: UnsafePointer<load_command> -> UnsafePointer<load_command> = {
+			UnsafePointer<load_command>(UnsafePointer<Int8>($0).advancedBy(Int($0.memory.cmdsize)))
 		}
+		let initial = UnsafePointer<load_command>(self.handle.successor())
+		return reduce(1..<Int(self.handle.memory.ncmds), (initial, [initial])) { into, _ in
+			(next(into.0), into.1 + [next(into.0)])
+		}.1
 	}
 
 	public var symbols: [String] {
