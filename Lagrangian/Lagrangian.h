@@ -6,3 +6,4 @@ extern double LagrangianVersionNumber;
 /// Project version string for Lagrangian.
 extern const unsigned char LagrangianVersionString[];
 
+#import <Lagrangian/Bridging.h>

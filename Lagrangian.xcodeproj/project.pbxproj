@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D43D0CC21A377E0B00957796 /* Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = D43D0CC01A377E0B00957796 /* Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D43D0CC31A377E0B00957796 /* Bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D0CC11A377E0B00957796 /* Bridging.m */; };
 		D450AF731958F79000BC5DAA /* Lagrangian.h in Headers */ = {isa = PBXBuildFile; fileRef = D450AF721958F79000BC5DAA /* Lagrangian.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D450AF791958F79000BC5DAA /* Lagrangian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D450AF6D1958F79000BC5DAA /* Lagrangian.framework */; };
 		D450AF801958F79000BC5DAA /* LagrangianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF7F1958F79000BC5DAA /* LagrangianTests.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D43D0CC01A377E0B00957796 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
+		D43D0CC11A377E0B00957796 /* Bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridging.m; sourceTree = "<group>"; };
 		D450AF6D1958F79000BC5DAA /* Lagrangian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lagrangian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D450AF711958F79000BC5DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D450AF721958F79000BC5DAA /* Lagrangian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lagrangian.h; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 				D450AF8B1958F8D800BC5DAA /* Subject.swift */,
 				D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */,
 				D450AF8F19590C8400BC5DAA /* Suite.swift */,
+				D43D0CC01A377E0B00957796 /* Bridging.h */,
+				D43D0CC11A377E0B00957796 /* Bridging.m */,
 				D450AF701958F79000BC5DAA /* Supporting Files */,
 			);
 			path = Lagrangian;
@@ -121,6 +127,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43D0CC21A377E0B00957796 /* Bridging.h in Headers */,
 				D450AF731958F79000BC5DAA /* Lagrangian.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +231,7 @@
 			files = (
 				D450AF9019590C8400BC5DAA /* Suite.swift in Sources */,
 				D450AF8C1958F8D800BC5DAA /* Subject.swift in Sources */,
+				D43D0CC31A377E0B00957796 /* Bridging.m in Sources */,
 				D450AF8E1958FCE700BC5DAA /* Hypothesis.swift in Sources */,
 				D450AF8A1958F7B700BC5DAA /* Expectation.swift in Sources */,
 			);
