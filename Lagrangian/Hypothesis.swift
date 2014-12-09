@@ -15,6 +15,10 @@ public struct Not<H : HypothesisType> : HypothesisType {
 
 	public var description: String { return "not \(hypothesis.description)" }
 
+	public init(_ hypothesis: H) {
+		self.hypothesis = hypothesis
+	}
+
 	public func test(subject: H.Subject) -> Bool {
 		return !hypothesis.test(subject)
 	}
@@ -26,6 +30,10 @@ public struct Equal<T : Equatable> : HypothesisType {
 	public let object: T
 
 	public var description: String { return "equal \(object)" }
+
+	public init(_ object: T) {
+		self.object = object
+	}
 
 	public func test(subject: T) -> Bool {
 		return subject == object
