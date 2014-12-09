@@ -3,7 +3,7 @@
 import Lagrangian
 import XCTest
 
-class LagrangianTests: XCTestCase {
+final class LagrangianTests: XCTestCase {
 //    func testPrintable() {
 //		let expectations = [
 //			(%"string" == "string", "string should equal string"),
