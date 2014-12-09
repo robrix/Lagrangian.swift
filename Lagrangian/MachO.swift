@@ -99,7 +99,7 @@ public struct Header: DebugPrintable {
 			var sym = UnsafePointer<nlist_64>(base.advancedBy(Int(symtab.memory.symoff) + fileSlide))
 
 			let stringify: UnsafePointer<nlist_64> -> String? = { s in
-				((Int32(s.memory.n_type) & N_EXT) != N_EXT) ?
+				(((Int32(s.memory.n_type) & N_EXT) != N_EXT) || (s.memory.n_value == 0)) ?
 					nil
 				:	String.fromCString(strings.advancedBy(Int(L3StringIndexOfSymbolTableEntry(s))).memory)
 			}
