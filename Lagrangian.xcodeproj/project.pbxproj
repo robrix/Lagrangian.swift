@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D43D0CB51A372F7900957796 /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D0CB41A372F7900957796 /* MachO.swift */; };
 		D43D0CC21A377E0B00957796 /* Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = D43D0CC01A377E0B00957796 /* Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D43D0CC31A377E0B00957796 /* Bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D0CC11A377E0B00957796 /* Bridging.m */; };
 		D450AF731958F79000BC5DAA /* Lagrangian.h in Headers */ = {isa = PBXBuildFile; fileRef = D450AF721958F79000BC5DAA /* Lagrangian.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D43D0CB41A372F7900957796 /* MachO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
 		D43D0CC01A377E0B00957796 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		D43D0CC11A377E0B00957796 /* Bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridging.m; sourceTree = "<group>"; };
 		D450AF6D1958F79000BC5DAA /* Lagrangian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lagrangian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 				D450AF8B1958F8D800BC5DAA /* Subject.swift */,
 				D450AF8D1958FCE700BC5DAA /* Hypothesis.swift */,
 				D450AF8F19590C8400BC5DAA /* Suite.swift */,
+				D43D0CB41A372F7900957796 /* MachO.swift */,
 				D43D0CC01A377E0B00957796 /* Bridging.h */,
 				D43D0CC11A377E0B00957796 /* Bridging.m */,
 				D450AF701958F79000BC5DAA /* Supporting Files */,
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43D0CB51A372F7900957796 /* MachO.swift in Sources */,
 				D450AF9019590C8400BC5DAA /* Suite.swift in Sources */,
 				D450AF8C1958F8D800BC5DAA /* Subject.swift in Sources */,
 				D43D0CC31A377E0B00957796 /* Bridging.m in Sources */,
