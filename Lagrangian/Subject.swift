@@ -14,6 +14,12 @@ public final class Subject<T> {
 		thunk = value
 	}
 
+
+	func map<U>(f: T -> U) -> Subject<U> {
+		return Subject<U>(f(value))
+	}
+
+
 	public func when<U>(body: inout T -> U) -> Subject<U> {
 		return Subject<U>(body(&value))
 	}
