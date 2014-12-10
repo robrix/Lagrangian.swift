@@ -60,8 +60,8 @@ public struct Header: DebugPrintable {
 		let next: UnsafePointer<load_command> -> UnsafePointer<load_command> = {
 			UnsafePointer<load_command>(UnsafePointer<Int8>($0).advancedBy(Int($0.memory.cmdsize)))
 		}
-		let initial = UnsafePointer<load_command>(self.handle.successor())
-		return reduce(1..<Int(self.handle.memory.ncmds), (initial, [initial])) { into, _ in
+		let initial = UnsafePointer<load_command>(handle.successor())
+		return reduce(1..<Int(handle.memory.ncmds), (initial, [initial])) { into, _ in
 			(next(into.0), into.1 + [next(into.0)])
 		}.1
 	}
@@ -71,7 +71,7 @@ public struct Header: DebugPrintable {
 		var linkedit: UnsafePointer<segment_command_64>?
 		var symtab: UnsafePointer<symtab_command>?
 
-		iterate: for each in self.commands {
+		iterate: for each in commands {
 			switch each.memory.cmd {
 			case UInt32(LC_SEGMENT_64):
 				let segment = UnsafePointer<segment_command_64>(each)
