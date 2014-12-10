@@ -90,15 +90,21 @@ public struct Header: DebugPrintable {
 		}
 
 		if let (text, (linkedit, symtab)) = text <*> linkedit <*> symtab {
-			let base = UnsafePointer<Int8>(self.handle)
-			let fileSlide = Int(linkedit.memory.vmaddr) - Int(text.memory.vmaddr) - Int(linkedit.memory.fileoff)
-			let strings = UnsafePointer<UnsafePointer<CChar>>(base.advancedBy(Int(symtab.memory.stroff) + fileSlide))
-			var sym = UnsafePointer<nlist_64>(base.advancedBy(Int(symtab.memory.symoff) + fileSlide))
+			let base = UnsafePointer<Int8>(handle)
+			let fileSlide = 0
+
+			let sym = UnsafePointer<nlist_64>(base.advancedBy(Int(symtab.memory.symoff) + fileSlide))
+
+			let stroff = Int(symtab.memory.stroff)
+
+			let stringAtOffset: Int -> String = {
+				String.fromCString(UnsafePointer<CChar>(base.advancedBy($0 + stroff + fileSlide)))!
+			}
 
 			let stringify: UnsafePointer<nlist_64> -> String? = { s in
 				(((Int32(s.memory.n_type) & N_EXT) != N_EXT) || (s.memory.n_value == 0)) ?
 					nil
-				:	String.fromCString(strings.advancedBy(Int(L3StringIndexOfSymbolTableEntry(s))).memory)
+				:	stringAtOffset(Int(L3StringIndexOfSymbolTableEntry(s)))
 			}
 
 			return reduce(0..<Int(symtab.memory.nsyms), (sym, [])) { (into: (UnsafePointer<nlist_64>, [String]), _) in
