@@ -97,10 +97,6 @@ public struct Header: DebugPrintable {
 
 			let stroff = Int(symtab.memory.stroff)
 
-			let fromSecondCharacter: String -> String = {
-				countElements($0) > 0 ? $0[advance($0.startIndex, 1)..<$0.endIndex] : $0
-			}
-
 			let stringAtOffset: Int -> String = {
 				String.fromCString(UnsafePointer<CChar>(base.advancedBy($0 + stroff + fileSlide)))!
 			}
@@ -108,7 +104,7 @@ public struct Header: DebugPrintable {
 			let stringify: UnsafePointer<nlist_64> -> String? = { s in
 				(((Int32(s.memory.n_type) & N_EXT) != N_EXT) || (s.memory.n_value == 0)) ?
 					nil
-				:	fromSecondCharacter(stringAtOffset(Int(L3StringIndexOfSymbolTableEntry(s))))
+				:	stringAtOffset(Int(L3StringIndexOfSymbolTableEntry(s))).fromOffset(1)
 			}
 
 
@@ -160,6 +156,17 @@ public struct Symbol: DebugPrintable {
 	// MARK: Private
 
 	private let handle: UnsafeMutablePointer<Void>
+}
+
+
+extension String {
+	private func fromOffset(offset: Int) -> String {
+		return self[advance(startIndex, offset, endIndex)..<endIndex]
+	}
+
+	private func toOffset(offset: Int) -> String {
+		return self[startIndex..<advance(startIndex, offset, endIndex)]
+	}
 }
 
 
