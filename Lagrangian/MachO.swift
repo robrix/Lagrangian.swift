@@ -155,6 +155,28 @@ func <*> <X, Y> (left: X?, right: Y?) -> (X, Y)? {
 	return nil
 }
 
+extension symtab_command: DebugPrintable {
+	public var debugDescription: String {
+		return "(cmd: \(cmd), cmdsize: \(cmdsize), symoff: \(symoff), nsyms: \(nsyms), stroff: \(stroff), strsize: \(strsize))"
+	}
+}
+
+extension mach_header_64: DebugPrintable {
+	public var debugDescription: String {
+		return "(magic: \(magic), cputype: \(cputype), cpusubtype: \(cpusubtype), filetype: \(filetype), ncmds: \(ncmds), sizeofcmds: \(sizeofcmds), flags: \(flags), reserved: \(reserved))"
+	}
+}
+
+extension segment_command_64: DebugPrintable {
+	private var name: String {
+		let c = segname
+		return [c.0, c.1, c.2, c.3, c.4, c.5, c.6, c.7, c.8, c.9, c.10, c.11, c.12, c.13, c.14, c.15].withUnsafeBufferPointer { String.fromCString($0.baseAddress) }!
+	}
+	public var debugDescription: String {
+		return "(cmd: \(cmd), cmdsize: \(cmdsize), segname: \(name), vmaddr: \(vmaddr), vmsize: \(vmsize), fileoff: \(fileoff), filesize: \(filesize), maxprot: \(maxprot), initprot: \(initprot), nsects: \(nsects), flags: \(flags))"
+	}
+}
+
 
 // MARK: - Imports
 
