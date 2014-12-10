@@ -115,6 +115,10 @@ public struct Header: DebugPrintable {
 		return []
 	}
 
+	private var image: Image? {
+		return Image(path: self.path)
+	}
+
 	private var handle: UnsafePointer<mach_header_64> {
 		return unsafeBitCast(_dyld_get_image_header(index), UnsafePointer<mach_header_64>.self)
 	}
