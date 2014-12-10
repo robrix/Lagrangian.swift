@@ -26,13 +26,14 @@ public struct Image {
 }
 
 public struct Header: DebugPrintable {
-	public let path: String
+	public var path: String {
+		return String.fromCString(_dyld_get_image_name(index))!
+	}
+
+	public let index: UInt32
 
 	public static var loadedHeaders: [Header] {
-		return map(0..<Int(_dyld_image_count())) {
-			let path = String.fromCString(_dyld_get_image_name(UInt32($0)))!
-			return Header(path: path, handle: unsafeBitCast(_dyld_get_image_header(UInt32($0)), UnsafePointer<mach_header_64>.self))
-		}
+		return map(0..<Int(_dyld_image_count())) { Header(index: UInt32($0)) }
 	}
 
 
@@ -45,9 +46,8 @@ public struct Header: DebugPrintable {
 
 	// MARK: Private
 
-	private init(path: String, handle: UnsafePointer<mach_header_64>) {
-		self.path = path
-		self.handle = handle
+	private init(index: UInt32) {
+		self.index = index
 	}
 
 	private var info: Dl_info? {
@@ -112,7 +112,13 @@ public struct Header: DebugPrintable {
 		return []
 	}
 
-	private let handle: UnsafePointer<mach_header_64>
+	private var handle: UnsafePointer<mach_header_64> {
+		return unsafeBitCast(_dyld_get_image_header(index), UnsafePointer<mach_header_64>.self)
+	}
+
+	private var vmaddrSlide: Int {
+		return _dyld_get_image_vmaddr_slide(index)
+	}
 }
 
 
