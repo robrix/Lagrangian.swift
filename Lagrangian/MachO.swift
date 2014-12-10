@@ -66,7 +66,7 @@ public struct Header: DebugPrintable {
 		}.1
 	}
 
-	public var symbols: [String] {
+	public var symbols: [Symbol] {
 		var text: UnsafePointer<segment_command_64>?
 		var linkedit: UnsafePointer<segment_command_64>?
 		var symtab: UnsafePointer<symtab_command>?
@@ -111,9 +111,16 @@ public struct Header: DebugPrintable {
 				:	fromSecondCharacter(stringAtOffset(Int(L3StringIndexOfSymbolTableEntry(s))))
 			}
 
-			return reduce(0..<Int(symtab.memory.nsyms), (sym, [])) { (into: (UnsafePointer<nlist_64>, [String]), _) in
-				(into.0.successor(), into.1 + (stringify(into.0).map { [$0] } ?? []))
-			}.1
+
+			if let image = self.image {
+				let symbols: String -> [Symbol] = {
+					image[$0].map { [$0] } ?? []
+				}
+
+				return reduce(0..<Int(symtab.memory.nsyms), (sym, [])) { (into: (UnsafePointer<nlist_64>, [Symbol]), _) in
+					(into.0.successor(), into.1 + (stringify(into.0).map(symbols) ?? []))
+				}.1
+			}
 		}
 
 		return []
