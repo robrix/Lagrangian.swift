@@ -75,12 +75,9 @@ public struct Header: DebugPrintable {
 			switch each.memory.cmd {
 			case UInt32(LC_SEGMENT_64):
 				let segment = UnsafePointer<segment_command_64>(each)
-				let c = segment.memory.segname
-				let name = [c.0, c.1, c.2, c.3, c.4, c.5, c.6, c.7, c.8, c.9, c.10, c.11, c.12, c.13, c.14, c.15].withUnsafeBufferPointer { String.fromCString($0.baseAddress) }
-
-				if name == SEG_TEXT {
+				if segment.memory.name == SEG_TEXT {
 					text = segment
-				} else if name == SEG_LINKEDIT {
+				} else if segment.memory.name == SEG_LINKEDIT {
 					linkedit = segment
 				}
 
