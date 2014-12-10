@@ -167,6 +167,14 @@ extension String {
 	private func toOffset(offset: Int) -> String {
 		return self[startIndex..<advance(startIndex, offset, endIndex)]
 	}
+
+
+	private static func commonPrefix(a: String, b: String) -> String {
+		for (i, (x, y)) in enumerate(Zip2(a, b)) {
+			if x != y { return a.toOffset(i) }
+		}
+		return countElements(a) > countElements(b) ? b : a
+	}
 }
 
 
