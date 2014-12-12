@@ -107,7 +107,6 @@ public struct Header: DebugPrintable {
 				:	stringAtOffset(Int(L3StringIndexOfSymbolTableEntry(s))).fromOffset(1)
 			}
 
-
 			if let image = self.image {
 				let symbols: String -> [Symbol] = {
 					image[$0].map { [$0] } ?? []
