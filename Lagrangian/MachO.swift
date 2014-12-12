@@ -136,7 +136,7 @@ public struct Header: DebugPrintable {
 }
 
 
-public struct Symbol: DebugPrintable {
+public struct Symbol: DebugPrintable, Printable {
 	public init?(name: String, handle: UnsafeMutablePointer<Void>) {
 		self.name = name
 		self.handle = handle
@@ -144,6 +144,13 @@ public struct Symbol: DebugPrintable {
 	}
 
 	public let name: String
+
+
+	// MARK: Printable
+
+	public var description: String {
+		return "\(name)"
+	}
 
 
 	// MARK: DebugPrintable
