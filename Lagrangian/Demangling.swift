@@ -13,6 +13,14 @@ public let identifier: Parser<String>.Function = { count($0).map { many($0)($1) 
 public let mangled = marker ++ identifier+ --> { ".".join($0) }
 
 
+public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
+	for each in domain {
+		if predicate(each) { return each }
+	}
+	return nil
+}
+
+
 // MARK: - Imports
 
 import Madness
