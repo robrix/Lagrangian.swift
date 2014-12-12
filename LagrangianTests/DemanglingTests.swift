@@ -13,6 +13,6 @@ final class DemanglingTests: XCTestCase {
 
 	func assertEqual<T: Equatable>(actual: @autoclosure () -> T?, _ expected: @autoclosure () -> T?, _ file: String = __FILE__, line: UInt = __LINE__) {
 		let (e, a) = (expected(), actual())
-		if e != a { XCTFail("\(a) is not equal to \(e)") }
+		if e != a { XCTFail("\(a) is not equal to \(e)", file: file, line: line) }
 	}
 }
