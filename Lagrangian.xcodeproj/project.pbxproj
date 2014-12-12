@@ -10,6 +10,14 @@
 		D43D0CB51A372F7900957796 /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D0CB41A372F7900957796 /* MachO.swift */; };
 		D43D0CC21A377E0B00957796 /* Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = D43D0CC01A377E0B00957796 /* Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D43D0CC31A377E0B00957796 /* Bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D0CC11A377E0B00957796 /* Bridging.m */; };
+		D44CA1F01A3A7D02001101B8 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1EC1A3A7D02001101B8 /* Box.framework */; };
+		D44CA1F11A3A7D02001101B8 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1ED1A3A7D02001101B8 /* Either.framework */; };
+		D44CA1F21A3A7D02001101B8 /* Madness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1EE1A3A7D02001101B8 /* Madness.framework */; };
+		D44CA1F31A3A7D02001101B8 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1EF1A3A7D02001101B8 /* Prelude.framework */; };
+		D44CA1F41A3A7D07001101B8 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1EC1A3A7D02001101B8 /* Box.framework */; };
+		D44CA1F51A3A7D07001101B8 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1ED1A3A7D02001101B8 /* Either.framework */; };
+		D44CA1F61A3A7D07001101B8 /* Madness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1EE1A3A7D02001101B8 /* Madness.framework */; };
+		D44CA1F71A3A7D07001101B8 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44CA1EF1A3A7D02001101B8 /* Prelude.framework */; };
 		D450AF731958F79000BC5DAA /* Lagrangian.h in Headers */ = {isa = PBXBuildFile; fileRef = D450AF721958F79000BC5DAA /* Lagrangian.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D450AF791958F79000BC5DAA /* Lagrangian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D450AF6D1958F79000BC5DAA /* Lagrangian.framework */; };
 		D450AF801958F79000BC5DAA /* LagrangianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450AF7F1958F79000BC5DAA /* LagrangianTests.swift */; };
@@ -33,6 +41,10 @@
 		D43D0CB41A372F7900957796 /* MachO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
 		D43D0CC01A377E0B00957796 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		D43D0CC11A377E0B00957796 /* Bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridging.m; sourceTree = "<group>"; };
+		D44CA1EC1A3A7D02001101B8 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Lagrangian-auaazclhyaxcjnecnhbtkucihdyl/Build/Products/Debug/Box.framework"; sourceTree = "<group>"; };
+		D44CA1ED1A3A7D02001101B8 /* Either.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Either.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Lagrangian-auaazclhyaxcjnecnhbtkucihdyl/Build/Products/Debug/Either.framework"; sourceTree = "<group>"; };
+		D44CA1EE1A3A7D02001101B8 /* Madness.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Madness.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Lagrangian-auaazclhyaxcjnecnhbtkucihdyl/Build/Products/Debug/Madness.framework"; sourceTree = "<group>"; };
+		D44CA1EF1A3A7D02001101B8 /* Prelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Prelude.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Lagrangian-auaazclhyaxcjnecnhbtkucihdyl/Build/Products/Debug/Prelude.framework"; sourceTree = "<group>"; };
 		D450AF6D1958F79000BC5DAA /* Lagrangian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lagrangian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D450AF711958F79000BC5DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D450AF721958F79000BC5DAA /* Lagrangian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lagrangian.h; sourceTree = "<group>"; };
@@ -50,6 +62,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D44CA1F01A3A7D02001101B8 /* Box.framework in Frameworks */,
+				D44CA1F11A3A7D02001101B8 /* Either.framework in Frameworks */,
+				D44CA1F21A3A7D02001101B8 /* Madness.framework in Frameworks */,
+				D44CA1F31A3A7D02001101B8 /* Prelude.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +73,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D44CA1F41A3A7D07001101B8 /* Box.framework in Frameworks */,
+				D44CA1F51A3A7D07001101B8 /* Either.framework in Frameworks */,
+				D44CA1F61A3A7D07001101B8 /* Madness.framework in Frameworks */,
+				D44CA1F71A3A7D07001101B8 /* Prelude.framework in Frameworks */,
 				D450AF791958F79000BC5DAA /* Lagrangian.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +89,10 @@
 			children = (
 				D450AF6F1958F79000BC5DAA /* Lagrangian */,
 				D450AF7C1958F79000BC5DAA /* LagrangianTests */,
+				D44CA1EC1A3A7D02001101B8 /* Box.framework */,
+				D44CA1ED1A3A7D02001101B8 /* Either.framework */,
+				D44CA1EE1A3A7D02001101B8 /* Madness.framework */,
+				D44CA1EF1A3A7D02001101B8 /* Prelude.framework */,
 				D450AF6E1958F79000BC5DAA /* Products */,
 			);
 			sourceTree = "<group>";

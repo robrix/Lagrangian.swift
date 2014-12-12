@@ -1,0 +1,3 @@
+[submodule "External/Madness"]
+	path = External/Madness
+	url = https://github.com/robrix/Madness.git
