@@ -91,7 +91,7 @@ public struct Header: DebugPrintable {
 
 		if let (text, (linkedit, symtab)) = text <*> linkedit <*> symtab {
 			let base = UnsafePointer<Int8>(handle)
-			let fileSlide = 0
+			let fileSlide = Int(linkedit.memory.vmaddr - text.memory.vmaddr - linkedit.memory.fileoff)
 
 			let sym = UnsafePointer<nlist_64>(base.advancedBy(Int(symtab.memory.symoff) + fileSlide))
 
