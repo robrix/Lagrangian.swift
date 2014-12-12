@@ -2,7 +2,7 @@
 
 let marker = ignore("_T")
 
-let count = (%("0"..."9"))+ --> { "".join($0).withCString { strtol($0, nil, 10) } }
+let count = (%("0"..."9"))+ --> { strtol("".join($0), nil, 10) }
 
 // todo: this belongs in Madness
 let any: Parser<String>.Function = { x in (x[x.startIndex..<advance(x.startIndex, 1, x.endIndex)], x[advance(x.startIndex, 1, x.endIndex)..<x.endIndex]) }
