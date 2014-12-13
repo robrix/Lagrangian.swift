@@ -46,7 +46,7 @@ enum Type: Printable {
 		case let .Tuple(types):
 			return "(" + ", ".join(types.map(toString)) + ")"
 		case let .Parameter(index):
-			return "\(index)"
+			return typeParameterName(index)
 		case let .Parameterized(count, type):
 			let parameters = map(0..<count, typeParameterName)
 			return "<" + ", ".join(parameters) + "> \(type)"
