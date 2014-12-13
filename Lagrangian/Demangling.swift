@@ -32,6 +32,8 @@ enum Type {
 	}
 }
 
+let never: Parser<Type>.Function = const(nil)
+
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
 	for each in domain {
