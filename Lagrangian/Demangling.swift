@@ -54,7 +54,9 @@ func never<T>() -> Parser<T>.Function {
 }
 
 /// fixme: this belongs in Madness probably
-infix operator >>= {}
+infix operator >>= {
+	precedence 150
+}
 func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) -> Parser<U>.Function {
 	return {
 		left($0).map { input, rest in
