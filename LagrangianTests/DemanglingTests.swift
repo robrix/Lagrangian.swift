@@ -8,6 +8,21 @@ final class DemanglingTests: XCTestCase {
 		assertEqual(identifier("10Lagrangian")?.0, "Lagrangian")
 	}
 
+	func testParsesMangledNames() {
+		let Lagrangian = find(Header.loadedHeaders) {
+			($0.path as NSString).lastPathComponent == "Prelude"
+		}
+		for symbol in Lagrangian?.symbols ?? [] {
+			if !startsWith(symbol.name, "_T") { continue }
+			let parsed = mangled(symbol.name)
+			if let result = assertNotNil(parsed?.0) {
+				println("\(symbol.name) → \(result)")
+			} else {
+				println(symbol.name)
+			}
+		}
+	}
+
 
 	// MARK: Assertions
 
