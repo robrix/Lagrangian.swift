@@ -18,12 +18,23 @@ prefix func % (strings: [String]) -> Parser<String>.Function {
 	}
 }
 
-enum Type {
+enum Type: Printable {
 	case Function(Box<Type>, Box<Type>)
 	case Enum()
 	case Struct()
 	case Class()
 	case Tuple([Type])
+
+	var description: String {
+		switch self {
+		case let .Function(argumentType, returnType):
+			return "\(argumentType) -> \(returnType)"
+		case let .Tuple(types):
+			return "(" + ", ".join(types.map(toString)) + ")"
+		default:
+			return ""
+		}
+	}
 }
 
 let types: [String: (Parser<Type>.Function)] = [
