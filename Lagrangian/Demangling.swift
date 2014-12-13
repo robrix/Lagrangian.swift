@@ -24,6 +24,7 @@ enum Type: Printable {
 	case Struct()
 	case Class()
 	case Tuple([Type])
+	case Parameter(Int)
 
 	var description: String {
 		switch self {
@@ -31,6 +32,8 @@ enum Type: Printable {
 			return "\(argumentType) -> \(returnType)"
 		case let .Tuple(types):
 			return "(" + ", ".join(types.map(toString)) + ")"
+		case let .Parameter(index):
+			return "\(index)"
 		default:
 			return ""
 		}
