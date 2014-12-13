@@ -23,6 +23,7 @@ enum Type {
 	case Enum(String)
 	case Struct(String)
 	case Class(String)
+	case Tuple([Type])
 
 	var identifier: String {
 		switch self {
@@ -34,6 +35,8 @@ enum Type {
 			return identifier
 		case let .Class(identifier):
 			return identifier
+		case let .Tuple:
+			return ""
 		}
 	}
 }
