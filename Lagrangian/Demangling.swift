@@ -42,7 +42,9 @@ enum Type: Printable {
 	var description: String {
 		switch self {
 		case let .Function(argumentType, returnType):
-			return "\(argumentType) -> \(returnType)"
+			return argumentType.value.needsParentheses ?
+				"(\(argumentType)) -> \(returnType)"
+			:	"\(argumentType) -> \(returnType)"
 		case let .Tuple(types):
 			return "(" + ", ".join(types.map(toString)) + ")"
 		case let .Parameter(index):
@@ -52,6 +54,15 @@ enum Type: Printable {
 			return "<" + ", ".join(parameters) + "> \(type)"
 		default:
 			return ""
+		}
+	}
+
+	var needsParentheses: Bool {
+		switch self {
+		case .Function:
+			return true
+		default:
+			return false
 		}
 	}
 }
