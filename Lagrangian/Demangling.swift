@@ -11,6 +11,13 @@ let many: Int -> Parser<String>.Function = { n in any * n --> { "".join($0) } }
 public let identifier: Parser<String>.Function = { count($0).map { many($0)($1) } ?? nil }
 
 public let mangled = marker ++ identifier+ --> { ".".join($0) }
+prefix func % (strings: [String]) -> Parser<String>.Function {
+	return { input in
+		find(strings, { startsWith(input, $0) }).map {
+			($0, input[advance(input.startIndex, countElements($0), input.endIndex)..<input.endIndex])
+		}
+	}
+}
 
 enum Type {
 	case Function(String)
