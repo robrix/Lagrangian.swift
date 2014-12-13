@@ -25,6 +25,7 @@ enum Type: Printable {
 	case Class()
 	case Tuple([Type])
 	case Parameter(Int)
+	case Parameterized(Int, Box<Type>)
 
 	var description: String {
 		switch self {
@@ -73,6 +74,8 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 let parseType: Parser<Type>.Function = annotation >>= {
 	types[$0] != nil ? types[$0]! : never()
 }
+let parseUnparameterizedType = annotation >>= { types[$0] != nil ? types[$0]! : never() }
+let parseParameterizedType = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
 
 let parseSymbol: Parser<String>.Function = annotation >>= {
 	symbols[$0] != nil ? symbols[$0]! : never()
