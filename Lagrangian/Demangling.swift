@@ -81,7 +81,7 @@ let parseSymbol: Parser<String>.Function = annotation >>= {
 	symbols[$0] != nil ? symbols[$0]! : never()
 }
 
-let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "S", "T", "v", "V", "W"]
+let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
 
 public let mangled = marker ++ ignore(annotation) ++ identifier+ ++ parseType --> { identifier, type in ".".join(identifier) + ": \(type)" }
 
