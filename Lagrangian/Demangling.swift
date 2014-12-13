@@ -10,7 +10,6 @@ let many: Int -> Parser<String>.Function = { n in any * n --> { "".join($0) } }
 
 public let identifier: Parser<String>.Function = { count($0).map { many($0)($1) } ?? nil }
 
-public let mangled = marker ++ identifier+ --> { ".".join($0) }
 prefix func % (strings: [String]) -> Parser<String>.Function {
 	return { input in
 		find(strings, { startsWith(input, $0) }).map {
@@ -62,6 +61,9 @@ let parseType: Parser<Type>.Function = annotation >>= {
 }
 
 let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "S", "T", "U", "v", "V", "W"]
+
+public let mangled = marker ++ parseType --> { $0.identifier }
+
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
 	for each in domain {
