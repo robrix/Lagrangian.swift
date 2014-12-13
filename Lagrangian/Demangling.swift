@@ -57,6 +57,10 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 	}
 }
 
+let parseType: Parser<Type>.Function = annotation >>= {
+	types[$0] != nil ? types[$0]! : never
+}
+
 let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "S", "T", "U", "v", "V", "W"]
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
