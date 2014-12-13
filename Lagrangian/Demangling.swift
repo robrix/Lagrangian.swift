@@ -41,12 +41,16 @@ enum Type: Printable {
 	}
 }
 
-let types: [String: (Parser<Type>.Function)] = [
-	"F": ignore(typeParameters * (0..<1)) ++ parseType ++ parseType --> { Type.Function(Box($0), Box($1)) },
-	"T": parseType* ++ ignore("_") --> { Type.Tuple($0) },
-]
+let parseFunctionType: Parser<Type>.Function = parseType ++ parseType --> { Type.Function(Box($0), Box($1)) }
+let parseTupleType: Parser<Type>.Function = parseType* ++ ignore("_") --> { Type.Tuple($0) }
+let parseOptionalDigit: Parser<Int>.Function = ((%("0"..."9"))+ --> { strtol("".join($0), nil, 10) + 1 }) * (0..<1) --> { $0.last ?? 0 }
+let parseTypeParameter: Parser<Type>.Function = parseOptionalDigit ++ ignore("_") --> { Type.Parameter($0) }
 
-let typeParameters = ignore(%"U" ++ (%"_")+)
+let types: [String: (Parser<Type>.Function)] = [
+	"F": parseFunctionType,
+	"T": parseTupleType,
+	"Q": parseTypeParameter,
+]
 
 let symbols: [String: (Parser<String>.Function)] = [
 	"F": identifier+ --> { ".".join($0) },
@@ -71,11 +75,9 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 	}
 }
 
-let parseType: Parser<Type>.Function = annotation >>= {
-	types[$0] != nil ? types[$0]! : never()
-}
 let parseUnparameterizedType = annotation >>= { types[$0] != nil ? types[$0]! : never() }
 let parseParameterizedType = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
+let parseType: Parser<Type>.Function = parseUnparameterizedType | parseParameterizedType
 
 let parseSymbol: Parser<String>.Function = annotation >>= {
 	symbols[$0] != nil ? symbols[$0]! : never()
