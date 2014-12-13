@@ -19,7 +19,7 @@ prefix func % (strings: [String]) -> Parser<String>.Function {
 }
 
 enum Type {
-	case Function()
+	case Function(Box<Type>, Box<Type>)
 	case Enum()
 	case Struct()
 	case Class()
@@ -27,7 +27,7 @@ enum Type {
 }
 
 let types: [String: (Parser<Type>.Function)] = [
-	"F": identifier* --> const(Type.Function()),
+	"F": ignore(typeParameters * (0..<1)) ++ parseType ++ parseType --> { Type.Function(Box($0), Box($1)) },
 	"T": parseType* ++ ignore("_") --> { Type.Tuple($0) },
 ]
 
@@ -77,5 +77,6 @@ public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> B
 
 // MARK: - Imports
 
+import Box
 import Madness
 import Prelude
