@@ -19,34 +19,28 @@ prefix func % (strings: [String]) -> Parser<String>.Function {
 }
 
 enum Type {
-	case Function(String)
-	case Enum(String)
-	case Struct(String)
-	case Class(String)
+	case Function()
+	case Enum()
+	case Struct()
+	case Class()
 	case Tuple([Type])
-
-	var identifier: String {
-		switch self {
-		case let .Function(identifier):
-			return identifier
-		case let .Enum(identifier):
-			return identifier
-		case let .Struct(identifier):
-			return identifier
-		case let .Class(identifier):
-			return identifier
-		case let .Tuple:
-			return ""
-		}
-	}
 }
 
 let types: [String: (Parser<Type>.Function)] = [
-	"F": identifier* --> { Type.Function(".".join($0)) },
+	"F": identifier* --> const(Type.Function()),
 	"T": parseType* ++ ignore("_") --> { Type.Tuple($0) },
 ]
 
-let never: Parser<Type>.Function = const(nil)
+let typeParameters = ignore(%"U" ++ (%"_")+)
+
+let symbols: [String: (Parser<String>.Function)] = [
+	"F": identifier+ --> { ".".join($0) },
+]
+
+// fixme: this belongs in Madness probably
+func never<T>() -> Parser<T>.Function {
+	return const(nil)
+}
 
 /// fixme: this belongs in Madness probably
 infix operator >>= {}
@@ -61,12 +55,16 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 }
 
 let parseType: Parser<Type>.Function = annotation >>= {
-	types[$0] != nil ? types[$0]! : never
+	types[$0] != nil ? types[$0]! : never()
+}
+
+let parseSymbol: Parser<String>.Function = annotation >>= {
+	symbols[$0] != nil ? symbols[$0]! : never()
 }
 
 let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "S", "T", "U", "v", "V", "W"]
 
-public let mangled = marker ++ parseType --> { $0.identifier }
+public let mangled = marker ++ ignore(annotation) ++ identifier+ ++ parseType --> { identifier, type in ".".join(identifier) }
 
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
