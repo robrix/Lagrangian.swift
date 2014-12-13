@@ -32,6 +32,10 @@ enum Type {
 	}
 }
 
+let types: [String: (Parser<Type>.Function)] = [
+	"F": identifier+ --> { Type.Function(".".join($0)) }
+]
+
 let never: Parser<Type>.Function = const(nil)
 
 
