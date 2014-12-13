@@ -38,6 +38,17 @@ let types: [String: (Parser<Type>.Function)] = [
 
 let never: Parser<Type>.Function = const(nil)
 
+/// fixme: this belongs in Madness probably
+infix operator >>= {}
+func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) -> Parser<U>.Function {
+	return {
+		left($0).map { input, rest in
+			right(input).map {
+				$0(rest)
+			} ?? nil
+		} ?? nil
+	}
+}
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
 	for each in domain {
@@ -50,3 +61,4 @@ public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> B
 // MARK: - Imports
 
 import Madness
+import Prelude
