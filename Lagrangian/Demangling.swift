@@ -12,6 +12,26 @@ public let identifier: Parser<String>.Function = { count($0).map { many($0)($1) 
 
 public let mangled = marker ++ identifier+ --> { ".".join($0) }
 
+enum Type {
+	case Function(String)
+	case Enum(String)
+	case Struct(String)
+	case Class(String)
+
+	var identifier: String {
+		switch self {
+		case let .Function(identifier):
+			return identifier
+		case let .Enum(identifier):
+			return identifier
+		case let .Struct(identifier):
+			return identifier
+		case let .Class(identifier):
+			return identifier
+		}
+	}
+}
+
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
 	for each in domain {
