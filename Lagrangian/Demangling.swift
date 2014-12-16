@@ -91,17 +91,17 @@ enum Type: Printable {
 
 	var description: String {
 		switch self {
-		case let .Function(argumentType, returnType):
+		case let Function(argumentType, returnType):
 			return argumentType.value.needsParentheses ?
 				"(\(argumentType)) -> \(returnType)"
 			:	"\(argumentType) -> \(returnType)"
-		case let .Tuple(types):
+		case let Tuple(types):
 			return types.count > 1 ?
 				"(" + ", ".join(types.map(toString)) + ")"
 			:	"".join(types.map(toString))
-		case let .Parameter(index):
+		case let Parameter(index):
 			return typeParameterName(index)
-		case let .Parameterized(count, type):
+		case let Parameterized(count, type):
 			let parameters = map(0..<count, typeParameterName)
 			return "<" + ", ".join(parameters) + "> \(type)"
 		default:
@@ -111,7 +111,7 @@ enum Type: Printable {
 
 	var needsParentheses: Bool {
 		switch self {
-		case .Function:
+		case Function:
 			return true
 		default:
 			return false
