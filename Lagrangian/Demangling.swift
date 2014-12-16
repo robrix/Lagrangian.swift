@@ -18,6 +18,13 @@ prefix func % (strings: [String]) -> Parser<String>.Function {
 	}
 }
 
+let fixityTable = [
+	"op": "prefix",
+	"oP": "postfix",
+	"oi": "infix",
+]
+let parseFixity: Parser<String>.Function = %map(fixityTable.keys, id) --> { fixityTable[$0]! }
+
 struct DemangledSymbol: Printable {
 	let module: Module
 	let identifier: String
