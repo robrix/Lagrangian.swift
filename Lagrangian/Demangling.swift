@@ -59,7 +59,7 @@ let operatorTable = [
 	"g": ">",
 	"l": "<"
 ]
-let parseOperatorName: Parser<String>.Function = (%map(operatorTable.keys, id) --> { operatorTable[$0]! })+ --> { "".join($0) }
+let parseOperatorName: Parser<String>.Function = parseCounted(%map(operatorTable.keys, id) --> { operatorTable[$0]! }) --> { "".join($0) }
 let parseOperator: Parser<String>.Function = parseFixity ++ parseOperatorName --> { "\($0) \($1)" }
 let parseFunctionSymbol: Parser<String>.Function = parseOperator | parseIdentifier
 
