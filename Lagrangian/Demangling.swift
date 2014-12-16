@@ -18,6 +18,16 @@ prefix func % (strings: [String]) -> Parser<String>.Function {
 	}
 }
 
+struct DemangledSymbol: Printable {
+	let module: Module
+	let identifier: String
+	let type: Type
+
+	var description: String {
+		return "\(module).\(identifier): \(type)"
+	}
+}
+
 struct Module: Printable {
 	let name: String
 
