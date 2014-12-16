@@ -54,6 +54,11 @@ let operatorTable = [
 ]
 let parseOperatorName: Parser<String>.Function = (%map(operatorTable.keys, id) --> { operatorTable[$0]! })+ --> { "".join($0) }
 let parseOperator: Parser<String>.Function = parseFixity ++ parseOperatorName --> { "\($0) \($1)" }
+let parseFunctionSymbol: Parser<String>.Function = parseOperator | parseIdentifier
+
+let symbolTable: [String: (Parser<String>.Function)] = [
+	"F": parseFunctionSymbol,
+]
 
 let alphabet = { (string: $0, count: countElements($0)) }("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 let nth: ((string: String, count: Int), Int) -> String = {
@@ -117,9 +122,6 @@ let types: [String: (Parser<Type>.Function)] = [
 	"Q": parseTypeParameter,
 ]
 
-let symbols: [String: (Parser<String>.Function)] = [
-	"F": parseIdentifier+ --> { ".".join($0) },
-]
 
 // fixme: this belongs in Madness probably
 func never<T>() -> Parser<T>.Function {
@@ -144,9 +146,6 @@ let parseUnparameterizedType: Parser<Type>.Function = parseAnnotation >>= { type
 let parseParameterizedType: Parser<Type>.Function = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
 let parseType: Parser<Type>.Function = parseUnparameterizedType | parseParameterizedType
 
-let parseSymbol: Parser<String>.Function = parseAnnotation >>= {
-	symbols[$0] != nil ? symbols[$0]! : never()
-}
 
 let parseAnnotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
 
