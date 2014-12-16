@@ -6,9 +6,11 @@ let marker = ignore("_T")
 
 let parseCount: Parser<Int>.Function = (%("0"..."9"))+ --> { strtol("".join($0), nil, 10) }
 
-let many: Int -> Parser<String>.Function = { n in any * n --> { "".join($0) } }
+func many<T>(parser: Parser<T>.Function, n: Int) -> Parser<[T]>.Function {
+	return parser * n
+}
 
-public let parseIdentifier: Parser<String>.Function = { parseCount($0).map { many($0)($1) } ?? nil }
+public let parseIdentifier: Parser<String>.Function = parseCount >>= { many(any, $0) --> { "".join($0) } }
 
 prefix func % (strings: [String]) -> Parser<String>.Function {
 	return { input in
