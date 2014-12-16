@@ -155,7 +155,7 @@ let parseType: Parser<Type>.Function = parseUnparameterizedType | parseParameter
 
 let parseAnnotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
 
-public let mangled: Parser<String>.Function = marker ++ ignore(parseAnnotation) ++ parseIdentifier+ ++ parseType --> { identifier, type in ".".join(identifier) + ": \(type)" }
+public let mangled: Parser<String>.Function = marker ++ parseMangledSymbol --> toString
 
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
