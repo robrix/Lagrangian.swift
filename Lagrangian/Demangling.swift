@@ -5,12 +5,11 @@
 let marker = ignore("_T")
 
 let parseCount: Parser<Int>.Function = (%("0"..."9"))+ --> { strtol("".join($0), nil, 10) }
-
-func many<T>(parser: Parser<T>.Function, n: Int) -> Parser<[T]>.Function {
-	return parser * n
+func parseCounted<T>(parser: Parser<T>.Function) -> Parser<[T]>.Function {
+	return parseCount >>= { parser * $0 }
 }
 
-public let parseIdentifier: Parser<String>.Function = parseCount >>= { many(any, $0) --> { "".join($0) } }
+public let parseIdentifier: Parser<String>.Function = parseCounted(any) --> { "".join($0) }
 
 prefix func % (strings: [String]) -> Parser<String>.Function {
 	return { input in
