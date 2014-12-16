@@ -58,6 +58,7 @@ let operatorTable = [
 	"p": "+",
 	"g": ">",
 	"l": "<",
+	"o": "|",
 ]
 let parseOperatorName: Parser<String>.Function = parseCounted(%map(operatorTable.keys, id) --> { operatorTable[$0]! }) --> { "".join($0) }
 let parseOperator: Parser<String>.Function = parseFixity ++ parseOperatorName --> { "\($0) \($1)" }
