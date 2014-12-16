@@ -8,7 +8,7 @@ let parseCount = (%("0"..."9"))+ --> { strtol("".join($0), nil, 10) }
 
 let many: Int -> Parser<String>.Function = { n in any * n --> { "".join($0) } }
 
-public let identifier: Parser<String>.Function = { parseCount($0).map { many($0)($1) } ?? nil }
+public let parseIdentifier: Parser<String>.Function = { parseCount($0).map { many($0)($1) } ?? nil }
 
 prefix func % (strings: [String]) -> Parser<String>.Function {
 	return { input in
@@ -81,7 +81,7 @@ let types: [String: (Parser<Type>.Function)] = [
 ]
 
 let symbols: [String: (Parser<String>.Function)] = [
-	"F": identifier+ --> { ".".join($0) },
+	"F": parseIdentifier+ --> { ".".join($0) },
 ]
 
 // fixme: this belongs in Madness probably
@@ -113,7 +113,7 @@ let parseSymbol: Parser<String>.Function = annotation >>= {
 
 let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
 
-public let mangled = marker ++ ignore(annotation) ++ identifier+ ++ parseType --> { identifier, type in ".".join(identifier) + ": \(type)" }
+public let mangled = marker ++ ignore(annotation) ++ parseIdentifier+ ++ parseType --> { identifier, type in ".".join(identifier) + ": \(type)" }
 
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {

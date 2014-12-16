@@ -5,7 +5,7 @@ import XCTest
 
 final class DemanglingTests: XCTestCase {
 	func testParsesIdentifiers() {
-		assertEqual(identifier("10Lagrangian")?.0, "Lagrangian")
+		assertEqual(parseIdentifier("10Lagrangian")?.0, "Lagrangian")
 	}
 
 	func testParsesMangledNames() {
