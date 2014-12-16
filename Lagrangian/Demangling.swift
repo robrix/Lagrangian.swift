@@ -47,6 +47,14 @@ struct Module: Printable {
 	}
 }
 
+let operatorTable = [
+	"p": "+",
+	"g": ">",
+	"l": "<"
+]
+let parseOperatorName: Parser<String>.Function = (%map(operatorTable.keys, id) --> { operatorTable[$0]! })+ --> { "".join($0) }
+let parseOperator: Parser<String>.Function = parseFixity ++ parseOperatorName --> { "\($0) \($1)" }
+
 let alphabet = { (string: $0, count: countElements($0)) }("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 let nth: ((string: String, count: Int), Int) -> String = {
 	String($0.string[advance($0.string.startIndex, $1, $0.string.endIndex)])
