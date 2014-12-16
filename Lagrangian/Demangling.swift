@@ -47,6 +47,12 @@ struct Module: Printable {
 	}
 }
 
+let parseMangledSymbol: Parser<DemangledSymbol>.Function = (parseAnnotation >>= {
+	Module.parse ++ (symbolTable[$0] != nil ? symbolTable[$0]! : never()) ++ parseType
+}) --> {
+	DemangledSymbol(module: $0, identifier: $1.0, type: $1.1)
+}
+
 let operatorTable = [
 	"p": "+",
 	"g": ">",
