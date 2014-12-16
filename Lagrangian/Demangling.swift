@@ -103,17 +103,17 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 	}
 }
 
-let parseUnparameterizedType: Parser<Type>.Function = annotation >>= { types[$0] != nil ? types[$0]! : never() }
+let parseUnparameterizedType: Parser<Type>.Function = parseAnnotation >>= { types[$0] != nil ? types[$0]! : never() }
 let parseParameterizedType: Parser<Type>.Function = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
 let parseType: Parser<Type>.Function = parseUnparameterizedType | parseParameterizedType
 
-let parseSymbol: Parser<String>.Function = annotation >>= {
+let parseSymbol: Parser<String>.Function = parseAnnotation >>= {
 	symbols[$0] != nil ? symbols[$0]! : never()
 }
 
-let annotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
+let parseAnnotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
 
-public let mangled: Parser<String>.Function = marker ++ ignore(annotation) ++ parseIdentifier+ ++ parseType --> { identifier, type in ".".join(identifier) + ": \(type)" }
+public let mangled: Parser<String>.Function = marker ++ ignore(parseAnnotation) ++ parseIdentifier+ ++ parseType --> { identifier, type in ".".join(identifier) + ": \(type)" }
 
 
 public func find<S: SequenceType>(domain: S, predicate: S.Generator.Element -> Bool) -> S.Generator.Element? {
