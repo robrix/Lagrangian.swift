@@ -18,6 +18,18 @@ prefix func % (strings: [String]) -> Parser<String>.Function {
 	}
 }
 
+struct Module: Printable {
+	let name: String
+
+	static func parse(input: String) -> (Module, String)? {
+		return (parseIdentifier --> { Module(name: $0) })(input)
+	}
+
+	var description: String {
+		return name
+	}
+}
+
 let alphabet = { (string: $0, count: countElements($0)) }("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 let nth: ((string: String, count: Int), Int) -> String = {
 	String($0.string[advance($0.string.startIndex, $1, $0.string.endIndex)])
