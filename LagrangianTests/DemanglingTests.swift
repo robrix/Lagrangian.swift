@@ -26,17 +26,17 @@ final class DemanglingTests: XCTestCase {
 
 	// MARK: Assertions
 
-	func assertEqual<T: Equatable>(actual: @autoclosure () -> T?, _ expected: @autoclosure () -> T?, _ file: String = __FILE__, line: UInt = __LINE__) {
+	func assertEqual<T: Equatable>(actual: @autoclosure () -> T?, _ expected: @autoclosure () -> T?, file: String = __FILE__, line: UInt = __LINE__) {
 		let (e, a) = (expected(), actual())
 		if e != a { XCTFail("\(a) is not equal to \(e)", file: file, line: line) }
 	}
 
-	func assertNotEqual<T: Equatable>(actual: @autoclosure () -> T?, _ unexpected: @autoclosure () -> T?, _ file: String = __FILE__, line: UInt = __LINE__) {
+	func assertNotEqual<T: Equatable>(actual: @autoclosure () -> T?, _ unexpected: @autoclosure () -> T?, file: String = __FILE__, line: UInt = __LINE__) {
 		let (e, a) = (unexpected(), actual())
 		if e == a { XCTFail("\(a) is equal to \(e)", file: file, line: line) }
 	}
 
-	func assertNotNil<T>(actual: @autoclosure () -> T?, _ file: String = __FILE__, _ line: UInt = __LINE__) -> T? {
+	func assertNotNil<T>(actual: @autoclosure () -> T?, file: String = __FILE__, line: UInt = __LINE__) -> T? {
 		return actual().map {
 			$0
 		} ?? failure("unexpected nil", file: file, line: line)
