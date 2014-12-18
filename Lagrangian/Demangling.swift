@@ -83,6 +83,7 @@ enum BaseType: Printable {
 	case String
 	case Optional
 	case Array
+	case Named(Swift.String)
 
 	var description: Swift.String {
 		switch self {
@@ -92,6 +93,8 @@ enum BaseType: Printable {
 			return "Swift.Optional"
 		case Array:
 			return "Swift.Array"
+		case let Named(name):
+			return "Swift.\(name)"
 		}
 	}
 }
@@ -151,7 +154,7 @@ var baseTypeTable: [String: BaseType] = [
 	"q": .Optional,
 	"a": .Array,
 ]
-let parseBaseType: Parser<Type>.Function = %map(baseTypeTable.keys, id) --> { .Base(baseTypeTable[$0]!) }
+let parseBaseType: Parser<Type>.Function = (%map(baseTypeTable.keys, id) --> { .Base(baseTypeTable[$0]!) }) | (ignore("s") ++ parseIdentifier --> { .Base(.Named($0)) })
 
 let parseGenericType: Parser<Type>.Function = parseType ++ parseType ++ ignore("_") --> { .Bound(Box($0), Box($1)) }
 
