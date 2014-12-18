@@ -141,6 +141,11 @@ let parseTupleType: Parser<Type>.Function = parseType* ++ ignore("_") --> { Type
 let parseOptionalDigit: Parser<Int>.Function = ((%("0"..."9"))+ --> { strtol("".join($0), nil, 10) + 1 }) * (0..<1) --> { $0.last ?? 0 }
 let parseTypeParameter: Parser<Type>.Function = parseOptionalDigit ++ ignore("_") --> { Type.Parameter($0) }
 
+var baseTypeTable: [String: BaseType] = [
+	"S": .String,
+	"q": .Optional,
+]
+let parseBaseType: Parser<Type>.Function = %map(baseTypeTable.keys, id) --> { .Base(baseTypeTable[$0]!) }
 
 
 // fixme: this belongs in Madness probably
@@ -166,6 +171,7 @@ let types: [String: (Parser<Type>.Function)] = [
 	"F": parseFunctionType,
 	"T": parseTupleType,
 	"Q": parseTypeParameter,
+	"S": parseBaseType,
 ]
 let parseUnparameterizedType: Parser<Type>.Function = %map(types.keys, id) >>= { types[$0] != nil ? types[$0]! : never() }
 let parseParameterizedType: Parser<Type>.Function = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
