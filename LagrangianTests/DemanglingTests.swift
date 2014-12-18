@@ -17,6 +17,9 @@ final class DemanglingTests: XCTestCase {
 			let parsed = mangled(symbol.name)
 			if let result = assertNotNil(parsed?.0) {
 //				println("\(symbol.name) → \(result)")
+				if let rest = assertNil(parsed?.1) {
+					println(symbol.name)
+				}
 			} else {
 				println(symbol.name)
 			}
