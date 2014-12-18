@@ -42,6 +42,13 @@ final class DemanglingTests: XCTestCase {
 		} ?? failure("unexpected nil", file: file, line: line)
 	}
 
+	func assertNil<T>(actual: @autoclosure () -> T?, file: String = __FILE__, line: UInt = __LINE__) -> T? {
+		let x = actual()
+		return x.map { value in
+			self.failure("expected nil, got \(value)", file: file, line: line)
+		} ?? nil
+	}
+
 	func failure(message: String, file: String = __FILE__, line: UInt = __LINE__) -> Bool {
 		XCTFail(message, file: file, line: line)
 		return false
