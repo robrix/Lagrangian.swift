@@ -169,7 +169,10 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 
 let parseUnparameterizedType: Parser<Type>.Function = parseAnnotation >>= { types[$0] != nil ? types[$0]! : never() }
 let parseParameterizedType: Parser<Type>.Function = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
-let parseType: Parser<Type>.Function = parseUnparameterizedType | parseParameterizedType
+let parseType: Parser<Type>.Function = fix { parseType in
+	parseUnparameterizedType | parseParameterizedType
+}
+
 
 
 let parseAnnotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
