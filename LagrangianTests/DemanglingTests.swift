@@ -16,7 +16,7 @@ final class DemanglingTests: XCTestCase {
 			if !startsWith(symbol.name, "_T") { continue }
 			let parsed = mangled(symbol.name)
 			if let result = assertNotNil(parsed?.0) {
-				println("\(symbol.name) → \(result)")
+//				println("\(symbol.name) → \(result)")
 			} else {
 				println(symbol.name)
 			}
