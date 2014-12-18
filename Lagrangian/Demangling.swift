@@ -88,9 +88,9 @@ enum BaseType: Printable {
 		switch self {
 		case String:
 			return "Swift.String"
-		case let Optional:
+		case Optional:
 			return "Swift.Optional"
-		case let Array:
+		case Array:
 			return "Swift.Array"
 		}
 	}
