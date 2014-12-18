@@ -68,14 +68,11 @@ let symbolTable: [String: (Parser<String>.Function)] = [
 	"F": parseFunctionSymbol,
 ]
 
-let alphabet = { (string: $0, count: countElements($0)) }("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-let nth: ((string: String, count: Int), Int) -> String = {
-	String($0.string[advance($0.string.startIndex, $1, $0.string.endIndex)])
-}
+let alphabet = map("ABCDEFGHIJKLMNOPQRSTUVWXYZ") { String($0) }
 
 func typeParameterName(n: Int) -> String {
 	let wrapped = n % alphabet.count
-	let letter = nth(alphabet, wrapped)
+	let letter = alphabet[wrapped]
 	let laps = (n - wrapped) / alphabet.count
 	return reduce(0..<laps, letter) { into, _ in into + letter }
 }
