@@ -147,7 +147,7 @@ var baseTypeTable: [String: BaseType] = [
 ]
 let parseBaseType: Parser<Type>.Function = %map(baseTypeTable.keys, id) --> { .Base(baseTypeTable[$0]!) }
 
-let parseGenericType: Parser<Type>.Function = parseType ++ parseType --> { .Bound(Box($0), Box($1)) }
+let parseGenericType: Parser<Type>.Function = parseType ++ parseType ++ ignore("_") --> { .Bound(Box($0), Box($1)) }
 
 // fixme: this belongs in Madness probably
 func never<T>() -> Parser<T>.Function {
@@ -180,7 +180,6 @@ let parseParameterizedType: Parser<Type>.Function = (ignore("U") ++ (%"_")+ --> 
 let parseType: Parser<Type>.Function = fix { parseType in
 	parseUnparameterizedType | parseParameterizedType
 }
-
 
 
 let parseAnnotation = %["a", "C", "d", "E", "F", "g", "L", "m", "M", "n", "o", "O", "p", "P", "Q", "S", "T", "v", "V", "W"]
