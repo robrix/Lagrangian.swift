@@ -141,11 +141,6 @@ let parseTupleType: Parser<Type>.Function = parseType* ++ ignore("_") --> { Type
 let parseOptionalDigit: Parser<Int>.Function = ((%("0"..."9"))+ --> { strtol("".join($0), nil, 10) + 1 }) * (0..<1) --> { $0.last ?? 0 }
 let parseTypeParameter: Parser<Type>.Function = parseOptionalDigit ++ ignore("_") --> { Type.Parameter($0) }
 
-let types: [String: (Parser<Type>.Function)] = [
-	"F": parseFunctionType,
-	"T": parseTupleType,
-	"Q": parseTypeParameter,
-]
 
 
 // fixme: this belongs in Madness probably
@@ -167,7 +162,12 @@ func >>= <T, U> (left: Parser<T>.Function, right: T -> (Parser<U>.Function)?) ->
 	}
 }
 
-let parseUnparameterizedType: Parser<Type>.Function = parseAnnotation >>= { types[$0] != nil ? types[$0]! : never() }
+let types: [String: (Parser<Type>.Function)] = [
+	"F": parseFunctionType,
+	"T": parseTupleType,
+	"Q": parseTypeParameter,
+]
+let parseUnparameterizedType: Parser<Type>.Function = %map(types.keys, id) >>= { types[$0] != nil ? types[$0]! : never() }
 let parseParameterizedType: Parser<Type>.Function = (ignore("U") ++ (%"_")+ --> { $0.count - 1 }) ++ parseUnparameterizedType --> { Type.Parameterized($0, Box($1)) }
 let parseType: Parser<Type>.Function = fix { parseType in
 	parseUnparameterizedType | parseParameterizedType
