@@ -100,6 +100,7 @@ enum Type: Printable {
 	case Parameter(Int)
 	case Parameterized(Int, Box<Type>)
 	case Base(BaseType)
+	case Bound(Box<Type>, Box<Type>)
 
 	var description: String {
 		switch self {
@@ -118,6 +119,8 @@ enum Type: Printable {
 			return "<" + ", ".join(parameters) + "> \(type)"
 		case let Base(base):
 			return base.description
+		case let Bound(type, parameter):
+			return "\(type)<\(parameter)>"
 		default:
 			return ""
 		}
