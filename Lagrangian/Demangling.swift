@@ -80,6 +80,7 @@ func typeParameterName(n: Int) -> String {
 enum BaseType: Printable {
 	case String
 	case Optional
+	case Array
 
 	var description: Swift.String {
 		switch self {
@@ -87,6 +88,8 @@ enum BaseType: Printable {
 			return "Swift.String"
 		case let Optional:
 			return "Swift.Optional"
+		case let Array:
+			return "Swift.Array"
 		}
 	}
 }
@@ -144,6 +147,7 @@ let parseTypeParameter: Parser<Type>.Function = parseOptionalDigit ++ ignore("_"
 var baseTypeTable: [String: BaseType] = [
 	"S": .String,
 	"q": .Optional,
+	"a": .Array,
 ]
 let parseBaseType: Parser<Type>.Function = %map(baseTypeTable.keys, id) --> { .Base(baseTypeTable[$0]!) }
 
