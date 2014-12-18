@@ -77,6 +77,20 @@ func typeParameterName(n: Int) -> String {
 	return reduce(0..<laps, letter) { into, _ in into + letter }
 }
 
+enum BaseType: Printable {
+	case String
+	case Optional
+
+	var description: Swift.String {
+		switch self {
+		case String:
+			return "Swift.String"
+		case let Optional:
+			return "Swift.Optional"
+		}
+	}
+}
+
 enum Type: Printable {
 	case Function(Box<Type>, Box<Type>)
 	case Enum()
@@ -85,6 +99,7 @@ enum Type: Printable {
 	case Tuple([Type])
 	case Parameter(Int)
 	case Parameterized(Int, Box<Type>)
+	case Base(BaseType)
 
 	var description: String {
 		switch self {
@@ -101,6 +116,8 @@ enum Type: Printable {
 		case let Parameterized(count, type):
 			let parameters = map(0..<count, typeParameterName)
 			return "<" + ", ".join(parameters) + "> \(type)"
+		case let Base(base):
+			return base.description
 		default:
 			return ""
 		}
